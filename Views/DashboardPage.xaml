@@ -5,111 +5,134 @@
              Title="Dashboard"
              BackgroundColor="White">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="20">
+    <!-- The whole page scrolls inside the CollectionView, which avoids a
+         scroll view nested inside another scroll view (bad on phones). -->
+    <CollectionView x:Name="RecentSessionsList">
 
-            <!-- Header -->
-            <Label Text="Dashboard"
-                   FontSize="28"
-                   FontAttributes="Bold"/>
+        <!-- ===== Everything above the list ===== -->
+        <CollectionView.Header>
+            <VerticalStackLayout Padding="15" Spacing="15">
 
-            <Label Text="Welcome to AID HOPE+ Management System"
-                   TextColor="Gray"/>
+                <Label Text="Dashboard"
+                       FontSize="26"
+                       FontAttributes="Bold"/>
 
-            <!-- Stats Cards -->
-            <Grid ColumnDefinitions="*,*,*,*,*" 
-                  ColumnSpacing="15"
-                  RowSpacing="15">
+                <Label Text="Welcome to AID HOPE+ Management System"
+                       TextColor="Gray"/>
 
-                <!-- Total Beneficiaries -->
-                <Border Stroke="LightGray" StrokeThickness="1" Padding="15">
-                    <VerticalStackLayout>
-                        <Label Text="Total Beneficiaries" FontSize="12" TextColor="Gray"/>
-                        <Label x:Name="BeneficiariesCount" Text="0" FontSize="28" FontAttributes="Bold" TextColor="#8B0000"/>
+                <!-- Stat cards: wrap onto new rows on narrow screens.
+                     Basis=150 means about 2 per row on a phone, 5 in a row on desktop. -->
+                <FlexLayout Wrap="Wrap" Direction="Row" JustifyContent="Start">
+
+                    <Border FlexLayout.Basis="150" FlexLayout.Grow="1"
+                            Margin="5" Padding="15"
+                            Stroke="LightGray" StrokeThickness="1">
+                        <VerticalStackLayout>
+                            <Label Text="Total Beneficiaries" FontSize="12" TextColor="Gray"/>
+                            <Label x:Name="BeneficiariesCount" Text="0" FontSize="26"
+                                   FontAttributes="Bold" TextColor="#8B0000"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border FlexLayout.Basis="150" FlexLayout.Grow="1"
+                            Margin="5" Padding="15"
+                            Stroke="LightGray" StrokeThickness="1">
+                        <VerticalStackLayout>
+                            <Label Text="Support Sessions" FontSize="12" TextColor="Gray"/>
+                            <Label x:Name="SessionsCount" Text="0" FontSize="26"
+                                   FontAttributes="Bold" TextColor="#8B0000"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border FlexLayout.Basis="150" FlexLayout.Grow="1"
+                            Margin="5" Padding="15"
+                            Stroke="LightGray" StrokeThickness="1">
+                        <VerticalStackLayout>
+                            <Label Text="Awareness Events" FontSize="12" TextColor="Gray"/>
+                            <Label x:Name="EventsCount" Text="0" FontSize="26"
+                                   FontAttributes="Bold" TextColor="#8B0000"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border FlexLayout.Basis="150" FlexLayout.Grow="1"
+                            Margin="5" Padding="15"
+                            Stroke="LightGray" StrokeThickness="1">
+                        <VerticalStackLayout>
+                            <Label Text="Attendance Records" FontSize="12" TextColor="Gray"/>
+                            <Label x:Name="AttendanceCount" Text="0" FontSize="26"
+                                   FontAttributes="Bold" TextColor="#8B0000"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border FlexLayout.Basis="150" FlexLayout.Grow="1"
+                            Margin="5" Padding="15"
+                            Stroke="LightGray" StrokeThickness="1">
+                        <VerticalStackLayout>
+                            <Label Text="Pending Requests" FontSize="12" TextColor="Gray"/>
+                            <Label x:Name="PendingCount" Text="1" FontSize="26"
+                                   FontAttributes="Bold" TextColor="#8B0000"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                </FlexLayout>
+
+                <Label Text="Recent Support Sessions"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       Margin="0,10,0,0"/>
+
+            </VerticalStackLayout>
+        </CollectionView.Header>
+
+        <!-- ===== Each session is a card instead of a 4-column table row ===== -->
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Border Margin="15,5"
+                        Padding="12"
+                        Stroke="LightGray"
+                        StrokeThickness="1"
+                        BackgroundColor="{Binding BackgroundColor}">
+                    <VerticalStackLayout Spacing="4">
+
+                        <Label Text="{Binding Beneficiary.FullName}"
+                               FontAttributes="Bold"
+                               FontSize="16"/>
+
+                        <FlexLayout Wrap="Wrap" JustifyContent="SpaceBetween">
+                            <Label Text="{Binding SupportType}"
+                                   TextColor="#8B0000"/>
+                            <Label Text="{Binding SessionDate, StringFormat='{0:yyyy-MM-dd}'}"
+                                   TextColor="Gray"/>
+                        </FlexLayout>
+
+                        <Label Text="{Binding FollowUpNotes}"
+                               FontSize="13"
+                               TextColor="Gray"
+                               MaxLines="2"
+                               LineBreakMode="TailTruncation"/>
+
                     </VerticalStackLayout>
                 </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
 
-                <!-- Support Sessions -->
-                <Border Grid.Column="1" Stroke="LightGray" StrokeThickness="1" Padding="15">
-                    <VerticalStackLayout>
-                        <Label Text="Support Sessions" FontSize="12" TextColor="Gray"/>
-                        <Label x:Name="SessionsCount" Text="0" FontSize="28" FontAttributes="Bold" TextColor="#8B0000"/>
-                    </VerticalStackLayout>
-                </Border>
-
-                <!-- Awareness Events -->
-                <Border Grid.Column="2" Stroke="LightGray" StrokeThickness="1" Padding="15">
-                    <VerticalStackLayout>
-                        <Label Text="Awareness Events" FontSize="12" TextColor="Gray"/>
-                        <Label x:Name="EventsCount" Text="0" FontSize="28" FontAttributes="Bold" TextColor="#8B0000"/>
-                    </VerticalStackLayout>
-                </Border>
-
-                <!-- Attendance -->
-                <Border Grid.Column="3" Stroke="LightGray" StrokeThickness="1" Padding="15">
-                    <VerticalStackLayout>
-                        <Label Text="Attendance Records" FontSize="12" TextColor="Gray"/>
-                        <Label x:Name="AttendanceCount" Text="0" FontSize="28" FontAttributes="Bold" TextColor="#8B0000"/>
-                    </VerticalStackLayout>
-                </Border>
-
-                <!-- Pending Requests -->
-                <Border Grid.Column="4" Stroke="LightGray" StrokeThickness="1" Padding="15">
-                    <VerticalStackLayout>
-                        <Label Text="Pending Requests" FontSize="12" TextColor="Gray"/>
-                        <Label x:Name="PendingCount" Text="1" FontSize="28" FontAttributes="Bold" TextColor="#8B0000"/>
-                    </VerticalStackLayout>
-                </Border>
-            </Grid>
-
-            <!-- Recent Support Sessions -->
-            <Label Text="Recent Support Sessions"
-                   FontSize="20"
-                   FontAttributes="Bold"
-                   Margin="0,20,0,10"/>
-
-            <CollectionView x:Name="RecentSessionsList">
-                <CollectionView.Header>
-                    <Grid ColumnDefinitions="*,*,Auto,*" 
-                          BackgroundColor="#F0F0F0" 
-                          Padding="10">
-                        <Label Text="Beneficiary Name" FontAttributes="Bold"/>
-                        <Label Grid.Column="1" Text="Support Type" FontAttributes="Bold"/>
-                        <Label Grid.Column="2" Text="Date" FontAttributes="Bold"/>
-                        <Label Grid.Column="3" Text="Follow-up Notes" FontAttributes="Bold"/>
-                    </Grid>
-                </CollectionView.Header>
-
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid ColumnDefinitions="*,*,Auto,*" 
-                              Padding="10"
-                              BackgroundColor="{Binding BackgroundColor}">
-                            <Label Text="{Binding Beneficiary.FullName}"/>
-                            <Label Grid.Column="1" Text="{Binding SupportType}"/>
-                            <Label Grid.Column="2" Text="{Binding SessionDate, StringFormat='{0:yyyy-MM-dd}'}"/>
-                            <Label Grid.Column="3" Text="{Binding FollowUpNotes}" LineBreakMode="TailTruncation"/>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
-            <!-- Quick Navigation Buttons -->
-            <HorizontalStackLayout Spacing="15" Margin="0,20,0,0">
-                <Button Text="Beneficiaries" 
-                        BackgroundColor="#8B0000" 
-                        TextColor="White"
+        <!-- ===== Quick navigation buttons: wrap instead of running off screen ===== -->
+        <CollectionView.Footer>
+            <FlexLayout Wrap="Wrap" Padding="15" Margin="0,10,0,20">
+                <Button Text="Beneficiaries"
+                        BackgroundColor="#8B0000" TextColor="White"
+                        Margin="0,0,10,10"
                         Clicked="OnBeneficiariesClicked"/>
-                <Button Text="Awareness Events" 
-                        BackgroundColor="#8B0000" 
-                        TextColor="White"
+                <Button Text="Awareness Events"
+                        BackgroundColor="#8B0000" TextColor="White"
+                        Margin="0,0,10,10"
                         Clicked="OnEventsClicked"/>
-                <Button Text="Support Sessions" 
-                        BackgroundColor="#8B0000" 
-                        TextColor="White"
+                <Button Text="Support Sessions"
+                        BackgroundColor="#8B0000" TextColor="White"
+                        Margin="0,0,10,10"
                         Clicked="OnSupportClicked"/>
-            </HorizontalStackLayout>
+            </FlexLayout>
+        </CollectionView.Footer>
 
-        </VerticalStackLayout>
-    </ScrollView>
+    </CollectionView>
 </ContentPage>

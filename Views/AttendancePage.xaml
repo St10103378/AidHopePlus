@@ -5,58 +5,80 @@
              Title="Attendance"
              BackgroundColor="White">
 
-    <Grid RowDefinitions="Auto,Auto,*" Padding="20" RowSpacing="15">
+    <Grid RowDefinitions="Auto,Auto,*" Padding="15" RowSpacing="12">
 
-        <!-- Header -->
-        <Grid ColumnDefinitions="*,Auto">
+        <!-- Header: button wraps under the title on narrow screens -->
+        <FlexLayout Wrap="Wrap"
+                    JustifyContent="SpaceBetween"
+                    AlignItems="Center">
             <Label Text="Attendance Records"
-                   FontSize="28"
+                   FontSize="26"
                    FontAttributes="Bold"
-                   VerticalOptions="Center"/>
-            <Button Grid.Column="1"
-                    Text="Record Attendance"
+                   VerticalOptions="Center"
+                   Margin="0,0,10,5"/>
+            <Button Text="Record Attendance"
                     BackgroundColor="#1a1a1a"
                     TextColor="White"
+                    Margin="0,0,0,5"
                     Clicked="OnAddClicked"/>
-        </Grid>
+        </FlexLayout>
 
         <!-- Search -->
         <SearchBar Grid.Row="1"
                    Placeholder="Search by name, event or status..."
                    TextChanged="OnSearchTextChanged"/>
 
-        <!-- Table -->
+        <!-- Each record is a card instead of a 5-column table row -->
         <CollectionView Grid.Row="2" x:Name="AttendanceList">
-            <CollectionView.Header>
-                <Grid ColumnDefinitions="*,*,120,100,120"
-                      BackgroundColor="#F0F0F0"
-                      Padding="10">
-                    <Label Text="Attendee" FontAttributes="Bold"/>
-                    <Label Grid.Column="1" Text="Event" FontAttributes="Bold"/>
-                    <Label Grid.Column="2" Text="Date" FontAttributes="Bold"/>
-                    <Label Grid.Column="3" Text="Status" FontAttributes="Bold"/>
-                    <Label Grid.Column="4" Text="Actions" FontAttributes="Bold"/>
-                </Grid>
-            </CollectionView.Header>
-
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="*,*,120,100,120"
-                          Padding="10">
-                        <Label Text="{Binding AttendeeName}" VerticalOptions="Center"/>
-                        <Label Grid.Column="1" Text="{Binding AwarenessEvent.EventName}" VerticalOptions="Center"/>
-                        <Label Grid.Column="2" Text="{Binding AttendanceDate, StringFormat='{0:yyyy-MM-dd}'}" VerticalOptions="Center"/>
-                        <Label Grid.Column="3" Text="{Binding Status}" VerticalOptions="Center"/>
-                        
-                        <HorizontalStackLayout Grid.Column="4" Spacing="8">
-                            <Button Text="View" FontSize="12" BackgroundColor="Transparent" TextColor="#0066cc"
-                                    Clicked="OnViewClicked" CommandParameter="{Binding .}"/>
-                            <Button Text="Delete" FontSize="12" BackgroundColor="Transparent" TextColor="#cc0000"
-                                    Clicked="OnDeleteClicked" CommandParameter="{Binding .}"/>
-                        </HorizontalStackLayout>
-                    </Grid>
+                    <Border Margin="0,5"
+                            Padding="12"
+                            Stroke="LightGray"
+                            StrokeThickness="1"
+                            BackgroundColor="White">
+                        <VerticalStackLayout Spacing="4">
+
+                            <!-- Attendee + status -->
+                            <FlexLayout Wrap="Wrap" JustifyContent="SpaceBetween">
+                                <Label Text="{Binding AttendeeName}"
+                                       FontAttributes="Bold"
+                                       FontSize="16"/>
+                                <Label Text="{Binding Status}"
+                                       TextColor="#8B0000"
+                                       FontAttributes="Bold"/>
+                            </FlexLayout>
+
+                            <!-- Event + date -->
+                            <FlexLayout Wrap="Wrap" JustifyContent="SpaceBetween">
+                                <Label Text="{Binding AwarenessEvent.EventName}"/>
+                                <Label Text="{Binding AttendanceDate, StringFormat='{0:yyyy-MM-dd}'}"
+                                       TextColor="Gray"/>
+                            </FlexLayout>
+
+                            <!-- Actions -->
+                            <FlexLayout Wrap="Wrap" Margin="0,4,0,0">
+                                <Button Text="View"
+                                        FontSize="13"
+                                        BackgroundColor="Transparent"
+                                        TextColor="#0066cc"
+                                        Padding="8,0"
+                                        Clicked="OnViewClicked"
+                                        CommandParameter="{Binding .}"/>
+                                <Button Text="Delete"
+                                        FontSize="13"
+                                        BackgroundColor="Transparent"
+                                        TextColor="#cc0000"
+                                        Padding="8,0"
+                                        Clicked="OnDeleteClicked"
+                                        CommandParameter="{Binding .}"/>
+                            </FlexLayout>
+
+                        </VerticalStackLayout>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
     </Grid>
 </ContentPage>

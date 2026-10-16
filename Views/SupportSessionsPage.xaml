@@ -5,46 +5,60 @@
              Title="Support Sessions"
              BackgroundColor="White">
 
-    <Grid RowDefinitions="Auto,Auto,*" Padding="20" RowSpacing="15">
+    <Grid RowDefinitions="Auto,Auto,*" Padding="15" RowSpacing="12">
 
-        <Grid ColumnDefinitions="*,Auto">
+        <!-- Title + Add button: wraps under the title on very narrow screens -->
+        <FlexLayout Wrap="Wrap"
+                    JustifyContent="SpaceBetween"
+                    AlignItems="Center">
             <Label Text="Support Sessions"
-                   FontSize="28"
+                   FontSize="26"
                    FontAttributes="Bold"
-                   VerticalOptions="Center"/>
-            <Button Grid.Column="1"
-                    Text="Add Session"
+                   VerticalOptions="Center"
+                   Margin="0,0,10,5"/>
+            <Button Text="Add Session"
                     BackgroundColor="#1a1a1a"
                     TextColor="White"
+                    Margin="0,0,0,5"
                     Clicked="OnAddClicked"/>
-        </Grid>
+        </FlexLayout>
 
         <SearchBar Grid.Row="1"
                    Placeholder="Search by name or support type..."
                    TextChanged="OnSearchTextChanged"/>
 
+        <!-- Each session is a card instead of a 4-column table row -->
         <CollectionView Grid.Row="2" x:Name="SessionsList">
-            <CollectionView.Header>
-                <Grid ColumnDefinitions="*,*,120,*"
-                      BackgroundColor="#F0F0F0"
-                      Padding="10">
-                    <Label Text="Beneficiary Name" FontAttributes="Bold"/>
-                    <Label Grid.Column="1" Text="Support Type" FontAttributes="Bold"/>
-                    <Label Grid.Column="2" Text="Date" FontAttributes="Bold"/>
-                    <Label Grid.Column="3" Text="Follow-up Notes" FontAttributes="Bold"/>
-                </Grid>
-            </CollectionView.Header>
-
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="*,*,120,*" Padding="10">
-                        <Label Text="{Binding Beneficiary.FullName}" VerticalOptions="Center"/>
-                        <Label Grid.Column="1" Text="{Binding SupportType}" VerticalOptions="Center"/>
-                        <Label Grid.Column="2" Text="{Binding SessionDate, StringFormat='{0:yyyy-MM-dd}'}" VerticalOptions="Center"/>
-                        <Label Grid.Column="3" Text="{Binding FollowUpNotes}" LineBreakMode="TailTruncation" VerticalOptions="Center"/>
-                    </Grid>
+                    <Border Margin="0,5"
+                            Padding="12"
+                            Stroke="LightGray"
+                            StrokeThickness="1">
+                        <VerticalStackLayout Spacing="4">
+
+                            <Label Text="{Binding Beneficiary.FullName}"
+                                   FontAttributes="Bold"
+                                   FontSize="16"/>
+
+                            <FlexLayout Wrap="Wrap" JustifyContent="SpaceBetween">
+                                <Label Text="{Binding SupportType}"
+                                       TextColor="#8B0000"/>
+                                <Label Text="{Binding SessionDate, StringFormat='{0:yyyy-MM-dd}'}"
+                                       TextColor="Gray"/>
+                            </FlexLayout>
+
+                            <Label Text="{Binding FollowUpNotes}"
+                                   FontSize="13"
+                                   TextColor="Gray"
+                                   MaxLines="3"
+                                   LineBreakMode="TailTruncation"/>
+
+                        </VerticalStackLayout>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
     </Grid>
 </ContentPage>

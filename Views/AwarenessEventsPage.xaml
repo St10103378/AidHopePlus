@@ -5,58 +5,74 @@
              Title="Awareness Events"
              BackgroundColor="White">
 
-    <Grid RowDefinitions="Auto,Auto,*" Padding="20" RowSpacing="15">
+    <Grid RowDefinitions="Auto,Auto,*" Padding="15" RowSpacing="12">
 
-        <!-- Header -->
-        <Grid ColumnDefinitions="*,Auto">
+        <!-- Header: Create button wraps under the title on narrow screens -->
+        <FlexLayout Wrap="Wrap"
+                    JustifyContent="SpaceBetween"
+                    AlignItems="Center">
             <Label Text="Awareness Events"
-                   FontSize="28"
+                   FontSize="26"
                    FontAttributes="Bold"
-                   VerticalOptions="Center"/>
-            <Button Grid.Column="1"
-                    Text="Create Event"
+                   VerticalOptions="Center"
+                   Margin="0,0,10,5"/>
+            <Button Text="Create Event"
                     BackgroundColor="#1a1a1a"
                     TextColor="White"
+                    Margin="0,0,0,5"
                     Clicked="OnCreateClicked"/>
-        </Grid>
+        </FlexLayout>
 
         <!-- Search -->
         <SearchBar Grid.Row="1"
                    Placeholder="Search events..."
                    TextChanged="OnSearchTextChanged"/>
 
-        <!-- Events List -->
+        <!-- Each event is a card instead of a 4-column table row -->
         <CollectionView Grid.Row="2" x:Name="EventsList">
-            <CollectionView.Header>
-                <Grid ColumnDefinitions="*,*,120,180"
-                      BackgroundColor="#F0F0F0"
-                      Padding="10">
-                    <Label Text="Event Name" FontAttributes="Bold"/>
-                    <Label Grid.Column="1" Text="Location" FontAttributes="Bold"/>
-                    <Label Grid.Column="2" Text="Date" FontAttributes="Bold"/>
-                    <Label Grid.Column="3" Text="Actions" FontAttributes="Bold"/>
-                </Grid>
-            </CollectionView.Header>
-
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="*,*,120,180"
-                          Padding="10">
-                        <Label Text="{Binding EventName}" VerticalOptions="Center"/>
-                        <Label Grid.Column="1" Text="{Binding Location}" VerticalOptions="Center"/>
-                        <Label Grid.Column="2" Text="{Binding EventDate, StringFormat='{0:yyyy-MM-dd}'}" VerticalOptions="Center"/>
-                        
-                        <HorizontalStackLayout Grid.Column="3" Spacing="8">
-                            <Button Text="View" FontSize="12" BackgroundColor="Transparent" TextColor="#0066cc"
-                                    Clicked="OnViewClicked" CommandParameter="{Binding .}"/>
-                            <Button Text="Edit" FontSize="12" BackgroundColor="Transparent" TextColor="#0066cc"
-                                    Clicked="OnEditClicked" CommandParameter="{Binding .}"/>
-                            <Button Text="Delete" FontSize="12" BackgroundColor="Transparent" TextColor="#cc0000"
-                                    Clicked="OnDeleteClicked" CommandParameter="{Binding .}"/>
-                        </HorizontalStackLayout>
-                    </Grid>
+                    <Border Margin="0,5"
+                            Padding="12"
+                            Stroke="LightGray"
+                            StrokeThickness="1"
+                            BackgroundColor="White">
+                        <VerticalStackLayout Spacing="4">
+
+                            <Label Text="{Binding EventName}"
+                                   FontAttributes="Bold"
+                                   FontSize="16"/>
+
+                            <FlexLayout Wrap="Wrap" JustifyContent="SpaceBetween">
+                                <Label Text="{Binding Location}"
+                                       TextColor="#8B0000"/>
+                                <Label Text="{Binding EventDate, StringFormat='{0:yyyy-MM-dd}'}"
+                                       TextColor="Gray"/>
+                            </FlexLayout>
+
+                            <FlexLayout Wrap="Wrap" Margin="0,4,0,0">
+                                <Button Text="View"
+                                        FontSize="13"
+                                        BackgroundColor="Transparent"
+                                        TextColor="#0066cc"
+                                        Padding="8,0"
+                                        Clicked="OnViewClicked"
+                                        CommandParameter="{Binding .}"/>
+                               
+                                <Button Text="Delete"
+                                        FontSize="13"
+                                        BackgroundColor="Transparent"
+                                        TextColor="#cc0000"
+                                        Padding="8,0"
+                                        Clicked="OnDeleteClicked"
+                                        CommandParameter="{Binding .}"/>
+                            </FlexLayout>
+
+                        </VerticalStackLayout>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
     </Grid>
 </ContentPage>
