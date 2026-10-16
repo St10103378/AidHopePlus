@@ -1,4 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <rect width="128" height="128" fill="#8B0000"/>
-  <text x="64" y="72" font-size="28" fill="white" text-anchor="middle" font-family="Arial">AID HOPE +</text>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 128 128"
+     width="100%"
+     height="100%"
+     preserveAspectRatio="xMidYMid meet">
+	<rect width="128" height="128" rx="16" fill="#8B0000"/>
+	<text x="64" y="60"
+		  font-size="18"
+		  font-weight="bold"
+		  fill="white"
+		  text-anchor="middle"
+		  font-family="Arial, sans-serif">
+		AID
+	</text>
+	<text x="64" y="83"
+		  font-size="18"
+		  font-weight="bold"
+		  fill="white"
+		  text-anchor="middle"
+		  font-family="Arial, sans-serif">
+		HOPE+
+	</text>
 </svg>
