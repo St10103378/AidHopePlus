@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AidHopePlus.Views.SupportSessionsPage"
+             Title="Support Sessions"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="20" RowSpacing="15">
+
+        <Grid ColumnDefinitions="*,Auto">
+            <Label Text="Support Sessions"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"/>
+            <Button Grid.Column="1"
+                    Text="Add Session"
+                    BackgroundColor="#1a1a1a"
+                    TextColor="White"
+                    Clicked="OnAddClicked"/>
+        </Grid>
+
+        <SearchBar Grid.Row="1"
+                   Placeholder="Search by name or support type..."
+                   TextChanged="OnSearchTextChanged"/>
+
+        <CollectionView Grid.Row="2" x:Name="SessionsList">
+            <CollectionView.Header>
+                <Grid ColumnDefinitions="*,*,120,*"
+                      BackgroundColor="#F0F0F0"
+                      Padding="10">
+                    <Label Text="Beneficiary Name" FontAttributes="Bold"/>
+                    <Label Grid.Column="1" Text="Support Type" FontAttributes="Bold"/>
+                    <Label Grid.Column="2" Text="Date" FontAttributes="Bold"/>
+                    <Label Grid.Column="3" Text="Follow-up Notes" FontAttributes="Bold"/>
+                </Grid>
+            </CollectionView.Header>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="*,*,120,*" Padding="10">
+                        <Label Text="{Binding Beneficiary.FullName}" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="{Binding SupportType}" VerticalOptions="Center"/>
+                        <Label Grid.Column="2" Text="{Binding SessionDate, StringFormat='{0:yyyy-MM-dd}'}" VerticalOptions="Center"/>
+                        <Label Grid.Column="3" Text="{Binding FollowUpNotes}" LineBreakMode="TailTruncation" VerticalOptions="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

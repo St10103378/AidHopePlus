@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AidHopePlus.Views.AttendancePage"
+             Title="Attendance"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="20" RowSpacing="15">
+
+        <!-- Header -->
+        <Grid ColumnDefinitions="*,Auto">
+            <Label Text="Attendance Records"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"/>
+            <Button Grid.Column="1"
+                    Text="Record Attendance"
+                    BackgroundColor="#1a1a1a"
+                    TextColor="White"
+                    Clicked="OnAddClicked"/>
+        </Grid>
+
+        <!-- Search -->
+        <SearchBar Grid.Row="1"
+                   Placeholder="Search by name, event or status..."
+                   TextChanged="OnSearchTextChanged"/>
+
+        <!-- Table -->
+        <CollectionView Grid.Row="2" x:Name="AttendanceList">
+            <CollectionView.Header>
+                <Grid ColumnDefinitions="*,*,120,100,120"
+                      BackgroundColor="#F0F0F0"
+                      Padding="10">
+                    <Label Text="Attendee" FontAttributes="Bold"/>
+                    <Label Grid.Column="1" Text="Event" FontAttributes="Bold"/>
+                    <Label Grid.Column="2" Text="Date" FontAttributes="Bold"/>
+                    <Label Grid.Column="3" Text="Status" FontAttributes="Bold"/>
+                    <Label Grid.Column="4" Text="Actions" FontAttributes="Bold"/>
+                </Grid>
+            </CollectionView.Header>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="*,*,120,100,120"
+                          Padding="10">
+                        <Label Text="{Binding AttendeeName}" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="{Binding AwarenessEvent.EventName}" VerticalOptions="Center"/>
+                        <Label Grid.Column="2" Text="{Binding AttendanceDate, StringFormat='{0:yyyy-MM-dd}'}" VerticalOptions="Center"/>
+                        <Label Grid.Column="3" Text="{Binding Status}" VerticalOptions="Center"/>
+                        
+                        <HorizontalStackLayout Grid.Column="4" Spacing="8">
+                            <Button Text="View" FontSize="12" BackgroundColor="Transparent" TextColor="#0066cc"
+                                    Clicked="OnViewClicked" CommandParameter="{Binding .}"/>
+                            <Button Text="Delete" FontSize="12" BackgroundColor="Transparent" TextColor="#cc0000"
+                                    Clicked="OnDeleteClicked" CommandParameter="{Binding .}"/>
+                        </HorizontalStackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

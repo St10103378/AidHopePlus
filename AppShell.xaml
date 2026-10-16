@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="AidHopePlus.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:AidHopePlus.Views"
+    FlyoutBehavior="Flyout"
+    FlyoutBackgroundColor="#F5F5F5"
+    Title="AID HOPE +">
+
+    <!-- Header -->
+    <Shell.FlyoutHeader>
+        <Grid BackgroundColor="#8B0000" HeightRequest="120" Padding="20">
+            <VerticalStackLayout VerticalOptions="Center">
+                <Label Text="AID HOPE +"
+                       TextColor="White"
+                       FontSize="24"
+                       FontAttributes="Bold"/>
+                <Label Text="Management System"
+                       TextColor="#FFCCCC"
+                       FontSize="13"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <!-- Footer -->
+    <Shell.FlyoutFooter>
+        <Grid BackgroundColor="#EEEEEE" HeightRequest="50" Padding="15,0">
+            <Label Text="© 2026 AID HOPE +"
+                   TextColor="Gray"
+                   FontSize="12"
+                   VerticalOptions="Center"/>
+        </Grid>
+    </Shell.FlyoutFooter>
+
+    <!-- Menu Items -->
+    <FlyoutItem Title="Dashboard">
+        <ShellContent ContentTemplate="{DataTemplate views:DashboardPage}" Route="Dashboard" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="About">
+        <ShellContent ContentTemplate="{DataTemplate views:AboutPage}" Route="About" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Support">
+        <ShellContent ContentTemplate="{DataTemplate views:SupportSessionsPage}" Route="Support" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Beneficiaries">
+        <ShellContent ContentTemplate="{DataTemplate views:BeneficiariesPage}" Route="Beneficiaries" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Awareness">
+        <ShellContent ContentTemplate="{DataTemplate views:AwarenessEventsPage}" Route="Awareness" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Attendance">
+        <ShellContent ContentTemplate="{DataTemplate views:AttendancePage}" Route="Attendance" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Reports">
+        <ShellContent ContentTemplate="{DataTemplate views:ReportsPage}" Route="Reports" />
+    </FlyoutItem>
+
+</Shell>

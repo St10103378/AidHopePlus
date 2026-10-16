@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AidHopePlus.Views.ReportsPage"
+             Title="Reports"
+             BackgroundColor="White">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="25">
+
+            <Label Text="Reports"
+                   FontSize="28"
+                   FontAttributes="Bold"/>
+
+            <!-- Summary Cards -->
+            <Label Text="System Summary" FontSize="18" FontAttributes="Bold"/>
+
+            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="12">
+                <Border Stroke="LightGray" StrokeThickness="1" Padding="12">
+                    <VerticalStackLayout>
+                        <Label Text="Beneficiaries" FontSize="12" TextColor="Gray"/>
+                        <Label x:Name="TotalBeneficiaries" Text="0" FontSize="24" FontAttributes="Bold" TextColor="#8B0000"/>
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="1" Stroke="LightGray" StrokeThickness="1" Padding="12">
+                    <VerticalStackLayout>
+                        <Label Text="Support Sessions" FontSize="12" TextColor="Gray"/>
+                        <Label x:Name="TotalSessions" Text="0" FontSize="24" FontAttributes="Bold" TextColor="#8B0000"/>
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="2" Stroke="LightGray" StrokeThickness="1" Padding="12">
+                    <VerticalStackLayout>
+                        <Label Text="Events" FontSize="12" TextColor="Gray"/>
+                        <Label x:Name="TotalEvents" Text="0" FontSize="24" FontAttributes="Bold" TextColor="#8B0000"/>
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="3" Stroke="LightGray" StrokeThickness="1" Padding="12">
+                    <VerticalStackLayout>
+                        <Label Text="Attendance" FontSize="12" TextColor="Gray"/>
+                        <Label x:Name="TotalAttendance" Text="0" FontSize="24" FontAttributes="Bold" TextColor="#8B0000"/>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- Beneficiary Status Breakdown -->
+            <Label Text="Beneficiaries by Status" FontSize="18" FontAttributes="Bold" Margin="0,10,0,0"/>
+            <CollectionView x:Name="StatusBreakdown" HeightRequest="100">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="*,Auto" Padding="8">
+                            <Label Text="{Binding Key}" VerticalOptions="Center"/>
+                            <Label Grid.Column="1" Text="{Binding Value}" FontAttributes="Bold" TextColor="#8B0000"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Support Type Breakdown -->
+            <Label Text="Support Sessions by Type" FontSize="18" FontAttributes="Bold"/>
+            <CollectionView x:Name="SupportTypeBreakdown" HeightRequest="220">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="*,Auto" Padding="8">
+                            <Label Text="{Binding Key}" VerticalOptions="Center"/>
+                            <Label Grid.Column="1" Text="{Binding Value}" FontAttributes="Bold" TextColor="#8B0000"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Recent Activity -->
+            <Label Text="Recent Support Sessions" FontSize="18" FontAttributes="Bold"/>
+            <CollectionView x:Name="RecentSessionsList" HeightRequest="250">
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions="*,*,120" BackgroundColor="#F0F0F0" Padding="8">
+                        <Label Text="Beneficiary" FontAttributes="Bold" FontSize="13"/>
+                        <Label Grid.Column="1" Text="Type" FontAttributes="Bold" FontSize="13"/>
+                        <Label Grid.Column="2" Text="Date" FontAttributes="Bold" FontSize="13"/>
+                    </Grid>
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="*,*,120" Padding="8">
+                            <Label Text="{Binding Beneficiary.FullName}" FontSize="13"/>
+                            <Label Grid.Column="1" Text="{Binding SupportType}" FontSize="13"/>
+                            <Label Grid.Column="2" Text="{Binding SessionDate, StringFormat='{0:yyyy-MM-dd}'}" FontSize="13"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Refresh Report"
+                    BackgroundColor="#8B0000"
+                    TextColor="White"
+                    Clicked="OnRefreshClicked"
+                    Margin="0,10,0,0"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

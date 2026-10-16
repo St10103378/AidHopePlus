@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AidHopePlus.Views.DashboardPage"
+             Title="Dashboard"
+             BackgroundColor="White">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Header -->
+            <Label Text="Dashboard"
+                   FontSize="28"
+                   FontAttributes="Bold"/>
+
+            <Label Text="Welcome to AID HOPE+ Management System"
+                   TextColor="Gray"/>
+
+            <!-- Stats Cards -->
+            <Grid ColumnDefinitions="*,*,*,*,*" 
+                  ColumnSpacing="15"
+                  RowSpacing="15">
+
+                <!-- Total Beneficiaries -->
+                <Border Stroke="LightGray" StrokeThickness="1" Padding="15">
+                    <VerticalStackLayout>
+                        <Label Text="Total Beneficiaries" FontSize="12" TextColor="Gray"/>
+                        <Label x:Name="BeneficiariesCount" Text="0" FontSize="28" FontAttributes="Bold" TextColor="#8B0000"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Support Sessions -->
+                <Border Grid.Column="1" Stroke="LightGray" StrokeThickness="1" Padding="15">
+                    <VerticalStackLayout>
+                        <Label Text="Support Sessions" FontSize="12" TextColor="Gray"/>
+                        <Label x:Name="SessionsCount" Text="0" FontSize="28" FontAttributes="Bold" TextColor="#8B0000"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Awareness Events -->
+                <Border Grid.Column="2" Stroke="LightGray" StrokeThickness="1" Padding="15">
+                    <VerticalStackLayout>
+                        <Label Text="Awareness Events" FontSize="12" TextColor="Gray"/>
+                        <Label x:Name="EventsCount" Text="0" FontSize="28" FontAttributes="Bold" TextColor="#8B0000"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Attendance -->
+                <Border Grid.Column="3" Stroke="LightGray" StrokeThickness="1" Padding="15">
+                    <VerticalStackLayout>
+                        <Label Text="Attendance Records" FontSize="12" TextColor="Gray"/>
+                        <Label x:Name="AttendanceCount" Text="0" FontSize="28" FontAttributes="Bold" TextColor="#8B0000"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Pending Requests -->
+                <Border Grid.Column="4" Stroke="LightGray" StrokeThickness="1" Padding="15">
+                    <VerticalStackLayout>
+                        <Label Text="Pending Requests" FontSize="12" TextColor="Gray"/>
+                        <Label x:Name="PendingCount" Text="1" FontSize="28" FontAttributes="Bold" TextColor="#8B0000"/>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- Recent Support Sessions -->
+            <Label Text="Recent Support Sessions"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   Margin="0,20,0,10"/>
+
+            <CollectionView x:Name="RecentSessionsList">
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions="*,*,Auto,*" 
+                          BackgroundColor="#F0F0F0" 
+                          Padding="10">
+                        <Label Text="Beneficiary Name" FontAttributes="Bold"/>
+                        <Label Grid.Column="1" Text="Support Type" FontAttributes="Bold"/>
+                        <Label Grid.Column="2" Text="Date" FontAttributes="Bold"/>
+                        <Label Grid.Column="3" Text="Follow-up Notes" FontAttributes="Bold"/>
+                    </Grid>
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="*,*,Auto,*" 
+                              Padding="10"
+                              BackgroundColor="{Binding BackgroundColor}">
+                            <Label Text="{Binding Beneficiary.FullName}"/>
+                            <Label Grid.Column="1" Text="{Binding SupportType}"/>
+                            <Label Grid.Column="2" Text="{Binding SessionDate, StringFormat='{0:yyyy-MM-dd}'}"/>
+                            <Label Grid.Column="3" Text="{Binding FollowUpNotes}" LineBreakMode="TailTruncation"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Quick Navigation Buttons -->
+            <HorizontalStackLayout Spacing="15" Margin="0,20,0,0">
+                <Button Text="Beneficiaries" 
+                        BackgroundColor="#8B0000" 
+                        TextColor="White"
+                        Clicked="OnBeneficiariesClicked"/>
+                <Button Text="Awareness Events" 
+                        BackgroundColor="#8B0000" 
+                        TextColor="White"
+                        Clicked="OnEventsClicked"/>
+                <Button Text="Support Sessions" 
+                        BackgroundColor="#8B0000" 
+                        TextColor="White"
+                        Clicked="OnSupportClicked"/>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

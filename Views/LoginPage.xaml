@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AidHopePlus.Views.LoginPage"
+             BackgroundColor="#F5F5F5"
+             Title="AID HOPE+ | Login">
+
+    <Grid>
+        <VerticalStackLayout VerticalOptions="Center" 
+                             HorizontalOptions="Center"
+                             Padding="40"
+                             Spacing="20"
+                             WidthRequest="400">
+
+            <!-- Title -->
+            <Label Text="AIDS HOPE +"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   TextColor="#8B0000"
+                   HorizontalOptions="Center"/>
+
+            <Label Text="HIV/AIDS SUPPORT AWARENESS MANAGEMENT SYSTEM"
+                   FontSize="12"
+                   TextColor="#8B0000"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,30"/>
+
+            <!-- Username -->
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
+                <Label Text="Username / Email"
+                       VerticalOptions="Center"
+                       TextColor="#8B0000"/>
+                <Entry x:Name="UsernameEntry"
+                       Grid.Column="1"
+                       Placeholder="Enter username"
+                       Text="staff"
+                       BackgroundColor="White"/>
+            </Grid>
+
+            <!-- Password -->
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
+                <Label Text="Password"
+                       VerticalOptions="Center"
+                       TextColor="#8B0000"/>
+                <Entry x:Name="PasswordEntry"
+                       Grid.Column="1"
+                       Placeholder="Enter password"
+                       IsPassword="True"
+                       Text="staff123"
+                       BackgroundColor="White"/>
+            </Grid>
+
+            <!-- Login Button -->
+            <Button Text="Login"
+                    BackgroundColor="#8B0000"
+                    TextColor="White"
+                    WidthRequest="120"
+                    HorizontalOptions="End"
+                    Clicked="OnLoginClicked"
+                    Margin="0,20,0,0"/>
+
+            <Label x:Name="ErrorLabel"
+                   TextColor="Red"
+                   IsVisible="False"
+                   HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
