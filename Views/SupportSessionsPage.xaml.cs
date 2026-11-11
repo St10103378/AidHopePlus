@@ -21,6 +21,10 @@ namespace AidHopePlus.Views
             SessionsList.ItemsSource = _allSessions;
         }
 
+        private void OnRefreshClicked(object sender, EventArgs e)
+        {
+            LoadData();
+        }
         private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
         {
             string search = e.NewTextValue?.ToLower() ?? "";

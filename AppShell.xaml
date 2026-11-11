@@ -23,19 +23,38 @@
         </Grid>
     </Shell.FlyoutHeader>
 
-    <!-- Footer -->
+    <!-- Footer with Logout -->
     <Shell.FlyoutFooter>
-        <Grid BackgroundColor="#EEEEEE" HeightRequest="50" Padding="15,0">
+        <Grid BackgroundColor="#EEEEEE" 
+              HeightRequest="70" 
+              Padding="15,10"
+              RowDefinitions="*,Auto">
+
             <Label Text="© 2026 AID HOPE +"
                    TextColor="Gray"
                    FontSize="12"
                    VerticalOptions="Center"/>
+
+            <Button Grid.Row="1"
+                    Text="Logout"
+                    BackgroundColor="#8B0000"
+                    TextColor="White"
+                    HeightRequest="36"
+                    CornerRadius="6"
+                    FontSize="14"
+                    Clicked="OnLogoutClicked"/>
         </Grid>
     </Shell.FlyoutFooter>
 
     <!-- Menu Items -->
     <FlyoutItem Title="Dashboard">
         <ShellContent ContentTemplate="{DataTemplate views:DashboardPage}" Route="Dashboard" />
+    </FlyoutItem>
+
+    <FlyoutItem x:Name="UserManagementItem"
+            Title="User Management">
+        <ShellContent ContentTemplate="{DataTemplate views:UserManagementPage}"
+                  Route="UserManagement" />
     </FlyoutItem>
 
     <FlyoutItem Title="About">

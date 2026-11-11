@@ -13,6 +13,18 @@ namespace AidHopePlus.Views
             LoadData();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            string username = Preferences.Get("LoggedInUsername", "User");
+
+            UsernameLabel.Text = $"Welcome, {username}!";
+        }
+        private void OnRefreshClicked(object sender, EventArgs e)
+        {
+            LoadData();
+        }
         private async void LoadData()
         {
             try

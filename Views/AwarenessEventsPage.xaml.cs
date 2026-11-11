@@ -27,7 +27,10 @@ namespace AidHopePlus.Views
                 await DisplayAlert("Error", ex.Message, "OK");
             }
         }
-
+        private void OnRefreshClicked(object sender, EventArgs e)
+        {
+            LoadData();
+        }
         private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
         {
             string search = e.NewTextValue?.ToLower() ?? "";

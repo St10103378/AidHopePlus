@@ -2,67 +2,118 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AidHopePlus.Views.LoginPage"
-             BackgroundColor="#F5F5F5"
-             Title="AID HOPE+ | Login">
+             BackgroundColor="#F5F5F5">
 
-    <Grid>
-        <VerticalStackLayout VerticalOptions="Center" 
-                             HorizontalOptions="Center"
-                             Padding="40"
-                             Spacing="20"
-                             WidthRequest="400">
+    <ScrollView>
+        <Grid x:Name="MainLayout"
+              ColumnDefinitions="*,*"
+              RowDefinitions="*"
+              MinimumHeightRequest="600">
 
-            <!-- Title -->
-            <Label Text="AIDS HOPE +"
-                   FontSize="32"
-                   FontAttributes="Bold"
-                   TextColor="#8B0000"
-                   HorizontalOptions="Center"/>
+            <!-- LEFT SIDE - BRANDING -->
+            <Grid x:Name="BrandingPanel"
+                  Grid.Column="0"
+                  BackgroundColor="#8B0000">
 
-            <Label Text="HIV/AIDS SUPPORT AWARENESS MANAGEMENT SYSTEM"
-                   FontSize="12"
-                   TextColor="#8B0000"
-                   HorizontalOptions="Center"
-                   Margin="0,0,0,30"/>
+                <Image Source="login_side.png"
+                       Aspect="AspectFill"
+                       Opacity="0.65"/>
 
-            <!-- Username -->
-            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
-                <Label Text="Username / Email"
-                       VerticalOptions="Center"
-                       TextColor="#8B0000"/>
-                <Entry x:Name="UsernameEntry"
-                       Grid.Column="1"
-                       Placeholder="Enter username"
-                       Text="staff"
-                       BackgroundColor="White"/>
+                <VerticalStackLayout
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Padding="25"
+                    Spacing="12">
+
+                    <Label Text="AID HOPE +"
+                           FontSize="36"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Center"/>
+
+                    <Label Text="HIV/AIDS Support Awareness&#10;Management System"
+                           FontSize="15"
+                           TextColor="White"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
             </Grid>
 
-            <!-- Password -->
-            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
-                <Label Text="Password"
-                       VerticalOptions="Center"
-                       TextColor="#8B0000"/>
-                <Entry x:Name="PasswordEntry"
-                       Grid.Column="1"
-                       Placeholder="Enter password"
-                       IsPassword="True"
-                       Text="staff123"
-                       BackgroundColor="White"/>
+            <!-- RIGHT SIDE - LOGIN FORM -->
+            <Grid x:Name="LoginPanel"
+                  Grid.Column="1"
+                  BackgroundColor="#F5F5F5">
+
+                <VerticalStackLayout
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Padding="35"
+                    Spacing="18"
+                    MaximumWidthRequest="420">
+
+                    <Label Text="Welcome Back"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           TextColor="#8B0000"
+                           HorizontalOptions="Center"/>
+
+                    <Label Text="Sign in to continue"
+                           FontSize="14"
+                           TextColor="#666666"
+                           HorizontalOptions="Center"
+                           Margin="0,0,0,15"/>
+
+                    <!-- USERNAME -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Username / Email"
+                               TextColor="#8B0000"
+                               FontSize="13"/>
+
+                        <Entry x:Name="UsernameEntry"
+                               Placeholder="Enter username"
+                               BackgroundColor="White"
+                               HeightRequest="48"/>
+                    </VerticalStackLayout>
+
+                    <!-- PASSWORD -->
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Password"
+                               TextColor="#8B0000"
+                               FontSize="13"/>
+
+                        <Entry x:Name="PasswordEntry"
+                               Placeholder="Enter password"
+                               IsPassword="True"
+                               BackgroundColor="White"
+                               HeightRequest="48"/>
+                    </VerticalStackLayout>
+
+                    <!-- LOGIN BUTTON -->
+                    <Button Text="Login"
+                            BackgroundColor="#8B0000"
+                            TextColor="White"
+                            HeightRequest="48"
+                            CornerRadius="8"
+                            FontAttributes="Bold"
+                            Clicked="OnLoginClicked"
+                            Margin="0,12,0,0"/>
+
+                    <Label x:Name="ErrorLabel"
+                           TextColor="Red"
+                           IsVisible="False"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           Margin="0,5,0,0"/>
+
+                    <Label Text="© 2026 AID HOPE +"
+                           TextColor="Gray"
+                           FontSize="11"
+                           HorizontalOptions="Center"
+                           Margin="0,20,0,0"/>
+
+                </VerticalStackLayout>
             </Grid>
 
-            <!-- Login Button -->
-            <Button Text="Login"
-                    BackgroundColor="#8B0000"
-                    TextColor="White"
-                    WidthRequest="120"
-                    HorizontalOptions="End"
-                    Clicked="OnLoginClicked"
-                    Margin="0,20,0,0"/>
-
-            <Label x:Name="ErrorLabel"
-                   TextColor="Red"
-                   IsVisible="False"
-                   HorizontalOptions="Center"/>
-        </VerticalStackLayout>
-    </Grid>
+        </Grid>
+    </ScrollView>
 </ContentPage>

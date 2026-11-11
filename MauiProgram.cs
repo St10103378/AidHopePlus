@@ -46,6 +46,10 @@ namespace AidHopePlus
             builder.Services.AddTransient<Views.AboutPage>();
             builder.Services.AddTransient<Views.AttendancePage>();
             builder.Services.AddTransient<Views.ReportsPage>();
+            builder.Services.AddTransient<Views.UserManagementPage>();
+
+
+
 
 #if DEBUG
             builder.Logging.AddDebug();

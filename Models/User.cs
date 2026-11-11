@@ -17,6 +17,8 @@ namespace AidHopePlus.Models
 
         [MaxLength(100)]
         public string? FullName { get; set; }
+        public string? Email { get; set; }
+
 
         [MaxLength(50)]
         public string Role { get; set; } = "Staff"; // Staff, Admin

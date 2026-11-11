@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AidHopePlus.Views.UserManagementPage"
+             BackgroundColor="#F5F5F5">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <Label Text="User Management"
+               FontSize="26"
+               FontAttributes="Bold"
+               TextColor="#8B0000"/>
+
+        <Button Text="+ Add User"
+                BackgroundColor="#8B0000"
+                TextColor="White"
+                Clicked="OnAddUserClicked"/>
+
+        <CollectionView x:Name="UsersCollection"
+                        HeightRequest="500">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="12"
+               Margin="0,0,0,8"
+               BackgroundColor="White"
+               BorderColor="#E0E0E0"
+               CornerRadius="8"
+               HasShadow="False">
+
+                        <VerticalStackLayout Spacing="8">
+
+                            <Label Text="{Binding FullName}"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="#222"/>
+
+                            <Label Text="{Binding Username, StringFormat='Username: {0}'}"
+                       FontSize="13"
+                       TextColor="#555"/>
+
+                            <Label Text="{Binding Email, StringFormat='Email: {0}'}"
+                       FontSize="13"
+                       TextColor="#555"/>
+
+                            <Label Text="{Binding Role, StringFormat='Role: {0}'}"
+                       FontSize="13"
+                       TextColor="#8B0000"/>
+
+                            <Button Text="Delete User"
+                        BackgroundColor="#DC2626"
+                        TextColor="White"
+                        FontSize="13"
+                        HeightRequest="38"
+                        CornerRadius="6"
+                        HorizontalOptions="End"
+                        CommandParameter="{Binding .}"
+                        Clicked="OnDeleteUserClicked"/>
+
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Label x:Name="EmptyLabel"
+               Text="No users found"
+               IsVisible="False"
+               TextColor="Gray"
+               HorizontalOptions="Center"/>
+
+    </VerticalStackLayout>
+</ContentPage>

@@ -13,7 +13,10 @@ namespace AidHopePlus.Views
             _db = Application.Current.Handler.MauiContext.Services.GetService<DatabaseService>();
             LoadData();
         }
-
+        private void OnRefreshClicked(object sender, EventArgs e)
+        {
+            LoadData();
+        }
         private async void LoadData(string search = "")
         {
             try

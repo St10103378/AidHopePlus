@@ -5,6 +5,9 @@ namespace AidHopePlus.Data
 {
     public class AppDbContext : DbContext
     {
+        public AppDbContext() : base()
+        {
+        }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
@@ -15,6 +18,23 @@ namespace AidHopePlus.Data
         public DbSet<User> Users { get; set; }
         public DbSet<AttendanceRecord> AttendanceRecords { get; set; }
 
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(
+                    "Server=tcp:st10103378.database.windows.net,1433;" +
+                "Initial Catalog=AidHopePlusDB;" +
+                "Persist Security Info=False;" +
+                "User ID=st10103378;" +
+                "Password=2025#Lis;" +
+                "MultipleActiveResultSets=False;" +
+                "Encrypt=True;" +
+                "TrustServerCertificate=False;" +
+                "Connection Timeout=30;");
+            }
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
