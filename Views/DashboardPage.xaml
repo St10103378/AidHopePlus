@@ -67,15 +67,7 @@
                         </VerticalStackLayout>
                     </Border>
 
-                    <Border FlexLayout.Basis="150" FlexLayout.Grow="1"
-                            Margin="5" Padding="15"
-                            Stroke="LightGray" StrokeThickness="1">
-                        <VerticalStackLayout>
-                            <Label Text="Pending Requests" FontSize="12" TextColor="Gray"/>
-                            <Label x:Name="PendingCount" Text="1" FontSize="26"
-                                   FontAttributes="Bold" TextColor="#8B0000"/>
-                        </VerticalStackLayout>
-                    </Border>
+                   
 
                 </FlexLayout>
 

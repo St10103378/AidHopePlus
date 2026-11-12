@@ -34,7 +34,6 @@ namespace AidHopePlus.Views
                 SessionsCount.Text = stats.Sessions.ToString();
                 EventsCount.Text = stats.Events.ToString();
                 AttendanceCount.Text = stats.Attendance.ToString();
-                PendingCount.Text = stats.Pending.ToString();
 
                 var sessions = await _db.GetRecentSupportSessionsAsync(8);
                 RecentSessionsList.ItemsSource = sessions;

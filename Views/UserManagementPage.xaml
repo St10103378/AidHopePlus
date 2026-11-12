@@ -15,6 +15,7 @@
                 BackgroundColor="#8B0000"
                 TextColor="White"
                 Clicked="OnAddUserClicked"/>
+       
 
         <CollectionView x:Name="UsersCollection"
                         HeightRequest="500">
@@ -45,7 +46,16 @@
                             <Label Text="{Binding Role, StringFormat='Role: {0}'}"
                        FontSize="13"
                        TextColor="#8B0000"/>
-
+                            <Button
+    Text="Edit User"
+    BackgroundColor="#246B4A"
+    TextColor="White"
+     FontSize="13"
+ HeightRequest="38"
+ CornerRadius="6"
+ HorizontalOptions="End"
+    CommandParameter="{Binding .}"
+    Clicked="OnEditUserClicked"/>
                             <Button Text="Delete User"
                         BackgroundColor="#DC2626"
                         TextColor="White"
